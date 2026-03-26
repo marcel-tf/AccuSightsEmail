@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response Analysis - AccuSights</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .back-btn {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .summary-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-card h2 {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+
+        .stat-item.negative {
+            border-left-color: #e74c3c;
+        }
+
+        .stat-item.interested {
+            border-left-color: #3498db;
+        }
+
+        .stat-item.hot-lead {
+            border-left-color: #2ecc71;
+        }
+
+        .stat-item.neutral {
+            border-left-color: #95a5a6;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .stat-percentage {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-left: 8px;
+        }
+
+        .responses-section {
+            margin-top: 40px;
+        }
+
+        .responses-section h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .response-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid;
+            transition: transform 0.2s ease;
+        }
+
+        .response-card:hover {
+            transform: translateX(5px);
+        }
+
+        .response-card.negative {
+            border-left-color: #e74c3c;
+        }
+
+        .response-card.interested {
+            border-left-color: #3498db;
+        }
+
+        .response-card.hot-lead {
+            border-left-color: #2ecc71;
+        }
+
+        .response-card.neutral {
+            border-left-color: #95a5a6;
+        }
+
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .response-who {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .response-email {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .response-category {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .response-category.negative {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .response-category.interested {
+            background: #3498db;
+            color: white;
+        }
+
+        .response-category.hot-lead {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .response-category.neutral {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .response-details {
+            margin-bottom: 15px;
+        }
+
+        .response-detail-item {
+            display: flex;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .response-detail-label {
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 120px;
+        }
+
+        .response-detail-value {
+            color: #5a6c7d;
+        }
+
+        .response-message {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #2c3e50;
+            font-style: italic;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            color: white;
+        }
+
+        .filter-btn.all.active {
+            background: #2c3e50;
+            border-color: #2c3e50;
+        }
+
+        .filter-btn.negative.active {
+            background: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        .filter-btn.interested.active {
+            background: #3498db;
+            border-color: #3498db;
+        }
+
+        .filter-btn.hot-lead.active {
+            background: #2ecc71;
+            border-color: #2ecc71;
+        }
+
+        .filter-btn.neutral.active {
+            background: #95a5a6;
+            border-color: #95a5a6;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f8c8d;
+        }
+
+        .no-data h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .summary-section {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Response Analysis</h1>
+            <a href="dashboard_accusights.html" class="back-btn">← Back to Dashboard</a>
+        </header>
+
+        <div class="content">
+            <div class="summary-section">
+                <div class="chart-card">
+                    <h2>Response Distribution</h2>
+                    <div class="chart-container">
+                        <canvas id="responseChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h2>Response Statistics</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item negative">
+                            <div class="stat-label">Negative/Unsubscribe</div>
+                            <div class="stat-value" id="negativeCount">2 <span class="stat-percentage">(25%)</span></div>
+                        </div>
+                        <div class="stat-item interested">
+                            <div class="stat-label">Interested/Engaged</div>
+                            <div class="stat-value" id="interestedCount">2 <span class="stat-percentage">(25%)</span></div>
+                        </div>
+                        <div class="stat-item hot-lead">
+                            <div class="stat-label">Hot Lead/Meeting</div>
+                            <div class="stat-value" id="hotLeadCount">2 <span class="stat-percentage">(25%)</span></div>
+                        </div>
+                        <div class="stat-item neutral">
+                            <div class="stat-label">Neutral/Acknowledgment</div>
+                            <div class="stat-value" id="neutralCount">2 <span class="stat-percentage">(25%)</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="responses-section">
+                <h2>All Responses (<span id="totalResponsesCount">8</span>)</h2>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn all active" onclick="filterResponses('all')">All (<span id="allCount">8</span>)</button>
+                    <button class="filter-btn negative" onclick="filterResponses('negative')">Negative (<span id="negativeFilterCount">2</span>)</button>
+                    <button class="filter-btn hot-lead" onclick="filterResponses('hot-lead')">Hot Lead (<span id="hotLeadFilterCount">2</span>)</button>
+                    <button class="filter-btn interested" onclick="filterResponses('interested')">Interested (<span id="interestedFilterCount">2</span>)</button>
+                    <button class="filter-btn neutral" onclick="filterResponses('neutral')">Neutral (<span id="neutralFilterCount">2</span>)</button>
+                </div>
+
+                <div id="responsesContainer">
+                    <!-- Responses will be populated here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Response data from AccuSightsReplies.xlsx - Last updated: 2026-03-23
+        const responsesData = [
+            {
+                category: "negative",
+                who: "Georgina",
+                email: "georgina@rakentrepreneurs.ae",
+                campaign: "UAE MSP",
+                date: "2026-02-05",
+                message: "Not needed. Please Unsubscribe. I never signed up for this."
+            },
+            {
+                category: "interested",
+                who: "Aleksejs Belakovs",
+                email: "alex@digitaltide.io",
+                campaign: "UAE MSP",
+                date: "2026-02-05",
+                message: "Hi Kash,\n\nI would recommend adding a signature to your messages, including information about your company, a LinkedIn link, and similar details in your profile. This usually increases the chances of getting a response. As for security questions, this is currently handled by a separate department, so it's not something I'm directly involved in. At the moment I'm not aware of any specific or unresolved issues.\n\nCould you please tell me a bit more about your company, what you do, and what your business model is?"
+            },
+            {
+                category: "interested",
+                who: "Darshap Nayak",
+                email: "darshap.nayak@aphelioncyber.com",
+                campaign: "UAE MSP",
+                date: "2026-02-05",
+                message: "Hello Kash,\n\nI handle the compliance and security partnerships.\n\nBest regards,\nDarshap"
+            },
+            {
+                category: "hot-lead",
+                who: "Yadhu Krishnan",
+                email: "yadhu@aurosecurity.com",
+                campaign: "UAE MSP",
+                date: "2026-02-05",
+                message: "Hi Kash - Thank you for your emails.\n\nIt seems like I got your entire email cadence within a span of minutes. I'd be happy to chat and explore how we can work together. You could use this link to find time: https://cal.com/yadhu-krishnan/30min\n\nBest,\n\nYadhu Krishnan\nFounder | Auro Security"
+            },
+            {
+                category: "neutral",
+                who: "Kamar Khateeb",
+                email: "kamarkhateeb@codentia.org",
+                campaign: "UAE MSP",
+                date: "2026-02-24",
+                message: "Hi\nYour messages were in spam. I just saw them.\n\nRegards,\nKamar"
+            },
+            {
+                category: "negative",
+                who: "Tarek Al Jamain",
+                email: "tjamain@care.med.sa",
+                campaign: "Saudi Arabia Hospitals",
+                date: "2026-03-02",
+                message: "Sorry we don't have loop to ask for closing, I think you send this email by mistake\n\nSent from my iPhone"
+            },
+            {
+                category: "neutral",
+                who: "shoeb@shazebict.com",
+                email: "shoeb@shazebict.com",
+                campaign: "UAE MSP",
+                date: "2026-02-24",
+                message: "Hi Team,\n\nWe will connect later.\n\nThanks and Regards,"
+            },
+            {
+                category: "hot-lead",
+                who: "Kamal",
+                email: "kamal@brinztech.com",
+                campaign: "UAE MSP",
+                date: "2026-02-24",
+                message: "Hi Kash,\n\nThank you for reaching out and for the overview of AccuSights.\n\nWe're interested in learning more about your offerings. I'll be reviewing this internally with my consultant next week, and based on that, we can schedule a meeting or call to discuss further.\n\nAppreciate you getting in touch, and I'll be in touch soon.\n\nBest Regards,"
+            }
+        ];
+
+        // Calculate statistics
+        const stats = {
+            negative: responsesData.filter(r => r.category === 'negative').length,
+            interested: responsesData.filter(r => r.category === 'interested').length,
+            hotLead: responsesData.filter(r => r.category === 'hot-lead').length,
+            neutral: responsesData.filter(r => r.category === 'neutral').length,
+            total: responsesData.length
+        };
+
+        // Create response distribution chart
+        const ctx = document.getElementById('responseChart');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Negative/Unsubscribe', 'Interested/Engaged', 'Hot Lead/Meeting', 'Neutral/Acknowledgment'],
+                datasets: [{
+                    data: [stats.negative, stats.interested, stats.hotLead, stats.neutral],
+                    backgroundColor: [
+                        '#e74c3c',
+                        '#3498db',
+                        '#2ecc71',
+                        '#95a5a6'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 13
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                return label + ': ' + value + ' (' + percentage + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Update statistics in the page
+        function updateStatistics() {
+            const total = stats.total;
+            document.getElementById('negativeCount').innerHTML = `${stats.negative} <span class="stat-percentage">(${((stats.negative/total)*100).toFixed(0)}%)</span>`;
+            document.getElementById('interestedCount').innerHTML = `${stats.interested} <span class="stat-percentage">(${((stats.interested/total)*100).toFixed(0)}%)</span>`;
+            document.getElementById('hotLeadCount').innerHTML = `${stats.hotLead} <span class="stat-percentage">(${((stats.hotLead/total)*100).toFixed(0)}%)</span>`;
+            document.getElementById('neutralCount').innerHTML = `${stats.neutral} <span class="stat-percentage">(${((stats.neutral/total)*100).toFixed(0)}%)</span>`;
+            document.getElementById('totalResponsesCount').textContent = total;
+            document.getElementById('allCount').textContent = total;
+            document.getElementById('negativeFilterCount').textContent = stats.negative;
+            document.getElementById('interestedFilterCount').textContent = stats.interested;
+            document.getElementById('hotLeadFilterCount').textContent = stats.hotLead;
+            document.getElementById('neutralFilterCount').textContent = stats.neutral;
+        }
+
+        // Render response cards
+        function renderResponses(data = responsesData) {
+            const container = document.getElementById('responsesContainer');
+
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="no-data">
+                        <h3>No Responses Found</h3>
+                        <p>Try selecting a different filter.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = data.map(response => `
+                <div class="response-card ${response.category}" data-category="${response.category}">
+                    <div class="response-header">
+                        <div>
+                            <div class="response-who">${response.who}</div>
+                            <div class="response-email">${response.email}</div>
+                        </div>
+                        <span class="response-category ${response.category}">
+                            ${response.category === 'hot-lead' ? 'Hot Lead' : response.category}
+                        </span>
+                    </div>
+                    <div class="response-details">
+                        <div class="response-detail-item">
+                            <span class="response-detail-label">Campaign:</span>
+                            <span class="response-detail-value">${response.campaign}</span>
+                        </div>
+                        <div class="response-detail-item">
+                            <span class="response-detail-label">Date:</span>
+                            <span class="response-detail-value">${new Date(response.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                        </div>
+                    </div>
+                    <div class="response-message">
+                        "${response.message}"
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter responses
+        function filterResponses(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter and render
+            if (category === 'all') {
+                renderResponses(responsesData);
+            } else {
+                const filtered = responsesData.filter(r => r.category === category);
+                renderResponses(filtered);
+            }
+        }
+
+        // Initialize on page load
+        updateStatistics();
+        renderResponses();
+    </script>
+</body>
+</html>
