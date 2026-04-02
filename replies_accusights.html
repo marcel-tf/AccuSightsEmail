@@ -409,43 +409,38 @@
                     <div class="stats-grid">
                         <div class="stat-item negative">
                             <div class="stat-label">Negative/Unsubscribe</div>
-                            <div class="stat-value" id="negativeCount">1 <span class="stat-percentage">(11.1%)</span></div>
+                            <div class="stat-value" id="negativeCount">2 <span class="stat-percentage">(18.2%)</span></div>
                         </div>
                         <div class="stat-item interested">
                             <div class="stat-label">Interested/Engaged</div>
-                            <div class="stat-value" id="interestedCount">2 <span class="stat-percentage">(22.2%)</span></div>
+                            <div class="stat-value" id="interestedCount">1 <span class="stat-percentage">(9.1%)</span></div>
                         </div>
                         <div class="stat-item hot-lead">
                             <div class="stat-label">Hot Lead/Meeting</div>
-                            <div class="stat-value" id="hotLeadCount">2 <span class="stat-percentage">(22.2%)</span></div>
+                            <div class="stat-value" id="hotLeadCount">3 <span class="stat-percentage">(27.3%)</span></div>
                         </div>
                         <div class="stat-item neutral">
                             <div class="stat-label">Neutral/Acknowledgment</div>
-                            <div class="stat-value" id="neutralCount">2 <span class="stat-percentage">(22.2%)</span></div>
-                        </div>
-                        <div class="stat-item automated-reply">
-                            <div class="stat-label">Automated Reply</div>
-                            <div class="stat-value" id="automatedReplyCount">1 <span class="stat-percentage">(11.1%)</span></div>
+                            <div class="stat-value" id="neutralCount">3 <span class="stat-percentage">(27.3%)</span></div>
                         </div>
                         <div class="stat-item pending">
-                            <div class="stat-label">Pending Review</div>
-                            <div class="stat-value" id="pendingCount">1 <span class="stat-percentage">(11.1%)</span></div>
+                            <div class="stat-label">Follow-Up Needed</div>
+                            <div class="stat-value" id="pendingCount">2 <span class="stat-percentage">(18.2%)</span></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="responses-section">
-                <h2>All Responses (<span id="totalResponsesCount">9</span>)</h2>
+                <h2>All Responses (<span id="totalResponsesCount">11</span>)</h2>
 
                 <div class="filter-buttons">
-                    <button class="filter-btn all active" onclick="filterResponses('all')">All (<span id="allCount">9</span>)</button>
-                    <button class="filter-btn negative" onclick="filterResponses('negative')">Negative (<span id="negativeFilterCount">1</span>)</button>
-                    <button class="filter-btn hot-lead" onclick="filterResponses('hot-lead')">Hot Lead (<span id="hotLeadFilterCount">2</span>)</button>
-                    <button class="filter-btn interested" onclick="filterResponses('interested')">Interested (<span id="interestedFilterCount">2</span>)</button>
-                    <button class="filter-btn neutral" onclick="filterResponses('neutral')">Neutral (<span id="neutralFilterCount">2</span>)</button>
-                    <button class="filter-btn automated-reply" onclick="filterResponses('automated-reply')">Automated (<span id="automatedReplyFilterCount">1</span>)</button>
-                    <button class="filter-btn pending" onclick="filterResponses('pending')">Pending (<span id="pendingFilterCount">1</span>)</button>
+                    <button class="filter-btn all active" onclick="filterResponses('all')">All (<span id="allCount">11</span>)</button>
+                    <button class="filter-btn negative" onclick="filterResponses('negative')">Negative (<span id="negativeFilterCount">2</span>)</button>
+                    <button class="filter-btn hot-lead" onclick="filterResponses('hot-lead')">Hot Lead (<span id="hotLeadFilterCount">3</span>)</button>
+                    <button class="filter-btn interested" onclick="filterResponses('interested')">Interested (<span id="interestedFilterCount">1</span>)</button>
+                    <button class="filter-btn neutral" onclick="filterResponses('neutral')">Neutral (<span id="neutralFilterCount">3</span>)</button>
+                    <button class="filter-btn pending" onclick="filterResponses('pending')">Follow-Up (<span id="pendingFilterCount">2</span>)</button>
                 </div>
 
                 <div id="responsesContainer">
@@ -471,13 +466,13 @@
                         </div>
                     </div>
 
-                    <div class="response-card interested" data-category="interested">
+                    <div class="response-card neutral" data-category="neutral">
                         <div class="response-header">
                             <div>
                                 <div class="response-who">Aleksejs Belakovs</div>
                                 <div class="response-email">alex@digitaltide.io</div>
                             </div>
-                            <div class="response-category interested">Interested/Engaged</div>
+                            <div class="response-category neutral">Neutral/Acknowledgment</div>
                         </div>
                         <div class="response-details">
                             <div class="response-detail-item">
@@ -493,17 +488,17 @@ I would recommend adding a signature to your messages, including information abo
 Could you please tell me a bit more about your company, what you do, and what your business model is?"
                         </div>
                         <div class="action-taken">
-                            Action Taken: Forwarded to Kash
+                            Action Taken: Met but not converted
                         </div>
                     </div>
 
-                    <div class="response-card neutral" data-category="neutral">
+                    <div class="response-card pending" data-category="pending">
                         <div class="response-header">
                             <div>
                                 <div class="response-who">Darshap Nayak</div>
                                 <div class="response-email">darshap.nayak@aphelioncyber.com</div>
                             </div>
-                            <div class="response-category neutral">Neutral/Acknowledgment</div>
+                            <div class="response-category pending">Follow-Up Needed</div>
                         </div>
                         <div class="response-details">
                             <div class="response-detail-item">
@@ -520,7 +515,7 @@ Best regards,
 Darshap"
                         </div>
                         <div class="action-taken">
-                            Action Taken: Forwarded to Kash
+                            Action Taken: Kah reached out to them directly no reply yet
                         </div>
                     </div>
 
@@ -539,7 +534,9 @@ Darshap"
                             </div>
                         </div>
                         <div class="response-message">
-                            "Hi Kash - Thank you for your emails.
+                            "​
+Kashmala Khalid​
+Hi Kash - Thank you for your emails.
 
 It seems like I got your entire email cadence within a span of minutes. I'd be happy to chat and explore how we can work together. You could use this link to find time: https://cal.com/yadhu-krishnan/30min
 
@@ -549,7 +546,7 @@ Yadhu Krishnan
 Founder | Auro Security"
                         </div>
                         <div class="action-taken">
-                            Action Taken: Met with Kash
+                            Action Taken: Met with Kash, converted into sale
                         </div>
                     </div>
 
@@ -575,17 +572,17 @@ Regards,
 Kamar"
                         </div>
                         <div class="action-taken">
-                            Action Taken: Forwarded to Kash
+                            Action Taken: Kash called them, No converted
                         </div>
                     </div>
 
-                    <div class="response-card pending" data-category="pending">
+                    <div class="response-card negative" data-category="negative">
                         <div class="response-header">
                             <div>
                                 <div class="response-who">Tarek Al Jamain</div>
                                 <div class="response-email">tjamain@care.med.sa</div>
                             </div>
-                            <div class="response-category pending">Pending Review</div>
+                            <div class="response-category negative">Negative/Unsubscribed</div>
                         </div>
                         <div class="response-details">
                             <div class="response-detail-item">
@@ -599,7 +596,7 @@ Kamar"
 Sent from my iPhone"
                         </div>
                         <div class="action-taken">
-                            Action Taken: Forwarded to Kash
+                            Action Taken: added a note to contact "do not contact again"
                         </div>
                     </div>
 
@@ -614,7 +611,7 @@ Sent from my iPhone"
                         <div class="response-details">
                             <div class="response-detail-item">
                                 <span class="response-detail-label">Subject:</span>
-                                <span class="response-detail-value">Closing the loop</span>
+                                <span class="response-detail-value">Quick question</span>
                             </div>
                         </div>
                         <div class="response-message">
@@ -629,14 +626,14 @@ We will connect later.
 Thanks and Regards,"
                         </div>
                         <div class="action-taken">
-                            Action Taken: Forwarded to Kash
+                            Action Taken: Kash reached ou to them directly but no reply yet
                         </div>
                     </div>
 
                     <div class="response-card hot-lead" data-category="hot-lead">
                         <div class="response-header">
                             <div>
-                                <div class="response-who">Kamal</div>
+                                <div class="response-who">Kamal Ahmed</div>
                                 <div class="response-email">kamal@brinztech.com</div>
                             </div>
                             <div class="response-category hot-lead">Hot Lead/Meeting</div>
@@ -666,13 +663,13 @@ Best Regards,"
                         </div>
                     </div>
 
-                    <div class="response-card automated-reply" data-category="automated-reply">
+                    <div class="response-card pending" data-category="pending">
                         <div class="response-header">
                             <div>
                                 <div class="response-who">Mark Rothwell-Brooks</div>
                                 <div class="response-email">mark@verityx.co</div>
                             </div>
-                            <div class="response-category automated-reply">Automated Reply</div>
+                            <div class="response-category pending">Follow-Up Needed</div>
                         </div>
                         <div class="response-details">
                             <div class="response-detail-item">
@@ -702,10 +699,79 @@ KSA Mobile : +966 569 740 173
 
 Office : +971 4 512 4001
 
-Meet me by clicking on this link"
+Meet me by clicking on this link
+"
                         </div>
                         <div class="action-taken">
-                            Action Taken: Forwarded to Kash
+                            Action Taken: Email updated in system, followed up with the new email
+                        </div>
+                    </div>
+
+                    <div class="response-card hot-lead" data-category="hot-lead">
+                        <div class="response-header">
+                            <div>
+                                <div class="response-who">Steve Carter</div>
+                                <div class="response-email">infosec4tc.com</div>
+                            </div>
+                            <div class="response-category hot-lead">Hot Lead/Meeting</div>
+                        </div>
+                        <div class="response-details">
+                            <div class="response-detail-item">
+                                <span class="response-detail-label">Subject:</span>
+                                <span class="response-detail-value">Introduction compliance partnership</span>
+                            </div>
+                        </div>
+                        <div class="response-message">
+                            "Hi,
+
+I would like to meet with you can we arrange a meeting"
+                        </div>
+                        <div class="action-taken">
+                            Action Taken: Met with Kah, she sent the proposal
+                        </div>
+                    </div>
+
+                    <div class="response-card neutral" data-category="neutral">
+                        <div class="response-header">
+                            <div>
+                                <div class="response-who">Kosay Tabaja</div>
+                                <div class="response-email">kosay.tabaja@cyninges.com</div>
+                            </div>
+                            <div class="response-category neutral">Neutral/Acknowledgment</div>
+                        </div>
+                        <div class="response-details">
+                            <div class="response-detail-item">
+                                <span class="response-detail-label">Subject:</span>
+                                <span class="response-detail-value">Exploring a compliance partnership</span>
+                            </div>
+                        </div>
+                        <div class="response-message">
+                            "Dear Kash,
+
+I hope you're doing well, and thank you for reaching out.
+
+At Cyninges, we operate as a Value-Added Distributor (VAD) covering the META region (Middle East, Turkey, and Africa), rather than an MSP.
+
+Our go-to-market model is built on two main sales arms:
+
+Direct Market Engagement:
+We work closely with end users to develop opportunities, conduct presentations, and run POCs. Once opportunities are matured, they are routed through our channel partners.
+Channel Development &amp; Enablement:
+We continuously recruit, enable, and support partners across the region to ensure proper coverage and execution.
+
+Given this structure, we focus heavily on enabling both vendors and partners while maintaining strong engagement with end customers.
+
+At the moment, I am out of the country due to the current situation and will plan my return once things become calmer. In the meantime, I would be happy to schedule a call to explore potential alignment and understand more about your offering.
+
+Looking forward to connecting.
+
+Best Regards,
+
+Kosay Tabaja, Ph.D
+VP Global Alliances &amp; Channels"
+                        </div>
+                        <div class="action-taken">
+                            Action Taken: Kash decided not to move forward with this one since they sound more like distributers and will charge a fee
                         </div>
                     </div>
                 </div>
@@ -714,7 +780,7 @@ Meet me by clicking on this link"
     </div>
 
     <script>
-        // Response data from AccuSightsReplies.xlsx - Last updated: 2026-04-01
+        // Response data from AccuSightsReplies.xlsx - Last updated: 2026-04-02
         const responsesData = [
             {
                 category: "negative",
@@ -725,19 +791,19 @@ Meet me by clicking on this link"
                 message: "Not needed. Please Unsubscribe.  I never signed up for this."
             },
             {
-                category: "interested",
+                category: "neutral",
                 who: "Aleksejs Belakovs",
                 email: "alex@digitaltide.io",
                 subject: "Quick question",
-                actionTaken: "Forwarded to Kash",
+                actionTaken: "Met but not converted",
                 message: "Hi Kash,\n\nI would recommend adding a signature to your messages, including information about your company, a LinkedIn link, and similar details in your profile. This usually increases the chances of getting a response. As for security questions, this is currently handled by a separate department, so it's not something I'm directly involved in. At the moment I'm not aware of any specific or unresolved issues.\n\nCould you please tell me a bit more about your company, what you do, and what your business model is?"
             },
             {
-                category: "neutral",
+                category: "pending",
                 who: "Darshap Nayak",
                 email: "darshap.nayak@aphelioncyber.com",
                 subject: "Quick question",
-                actionTaken: "Forwarded to Kash",
+                actionTaken: "Kah reached out to them directly no reply yet",
                 message: "Hello Kash, \n\nI handle the compliance and security partnerships. \n\nBest regards, \nDarshap"
             },
             {
@@ -745,48 +811,48 @@ Meet me by clicking on this link"
                 who: "Yadhu Krishnan",
                 email: "yadhu@aurosecurity.com",
                 subject: "Quick question",
-                actionTaken: "Met with Kash",
-                message: "Kashmala Khalid \nHi Kash - Thank you for your emails. \n\nIt seems like I got your entire email cadence within a span of minutes. I'd be happy to chat and explore how we can work together. You could use this link to find time: https://cal.com/yadhu-krishnan/30min \n\nBest, \n\nYadhu Krishnan \nFounder | Auro Security"
+                actionTaken: "Met with Kash, converted into sale",
+                message: "​ \nKashmala Khalid​ \nHi Kash - Thank you for your emails. \n\nIt seems like I got your entire email cadence within a span of minutes. I'd be happy to chat and explore how we can work together. You could use this link to find time: https://cal.com/yadhu-krishnan/30min \n\nBest, \n\nYadhu Krishnan \nFounder | Auro Security"
             },
             {
                 category: "neutral",
                 who: "Kamar Khateeb",
                 email: "kamarkhateeb@codentia.org",
                 subject: "Introduction – compliance partnership",
-                actionTaken: "Forwarded to Kash",
+                actionTaken: "Kash called them, No converted",
                 message: "Hi \nYour messages were in spam. I just saw them. \n\nRegards, \nKamar"
             },
             {
-                category: "pending",
+                category: "negative",
                 who: "Tarek Al Jamain",
                 email: "tjamain@care.med.sa",
                 subject: "Closing the loop",
-                actionTaken: "Forwarded to Kash",
+                actionTaken: "added a note to contact \"do not contact again\"",
                 message: "Sorry we don't have loop to ask for closing , I think you send this email by mistake \n\nSent from my iPhone"
             },
             {
                 category: "interested",
                 who: "shoeb@shazebict.com",
                 email: "shoeb@shazebict.com",
-                subject: "Closing the loop",
-                actionTaken: "Forwarded to Kash",
+                subject: "Quick question",
+                actionTaken: "Kash reached ou to them directly but no reply yet",
                 message: "Hi Team, \n\n\n\nWe will connect later. \n\n\n\nThanks and Regards,"
             },
             {
                 category: "hot-lead",
-                who: "Kamal",
+                who: "Kamal Ahmed",
                 email: "kamal@brinztech.com",
                 subject: "Exploring a compliance partnership",
                 actionTaken: "Met with Kash",
                 message: "Hi Kash, \n\nThank you for reaching out and for the overview of AccuSights. \n\nWe're interested in learning more about your offerings. I'll be reviewing this internally with my consultant next week, and based on that, we can schedule a meeting or call to discuss further. \n\nAppreciate you getting in touch, and I'll be in touch soon. \n\n\n\n\n \nBest Regards,"
             },
             {
-                category: "automated-reply",
+                category: "pending",
                 who: "Mark Rothwell-Brooks",
                 email: "mark@verityx.co",
                 subject: "Exploring a compliance partnership",
-                actionTaken: "Forwarded to Kash",
-                message: "Please by advised that following the completion of our rebrand, I can be contacted in mark@verityx.co\n\nMark Rothwell-Brooks\nChief Executive\n\nVerityX\n\nIFZA Business Park, DDP A1, Silicon Oasis, Dubai ‑ UAE\n\nwww.verityx.co\n\n\n\nEmail: mark@verityx.co\n\nUAE Mobile : +971 58 575 3137\n\nKSA Mobile : +966 569 740 173\n\nOffice : +971 4 512 4001\n\nMeet me by clicking on this link"
+                actionTaken: "Email updated in system, followed up with the new email",
+                message: "Please by advised that following the completion of our rebrand, I can be contacted in mark@verityx.co\n\nMark Rothwell-Brooks\nChief Executive\n\nVerityX\n\nIFZA Business Park, DDP A1, Silicon Oasis, Dubai ‑ UAE\n\nwww.verityx.co\n\n\n\nEmail: mark@verityx.co\n\nUAE Mobile : +971 58 575 3137\n\nKSA Mobile : +966 569 740 173\n\nOffice : +971 4 512 4001\n\nMeet me by clicking on this link\n"
             },
             {
                 category: "hot-lead",
@@ -794,7 +860,15 @@ Meet me by clicking on this link"
                 email: "infosec4tc.com",
                 subject: "Introduction compliance partnership",
                 actionTaken: "Met with Kah, she sent the proposal",
-                message: "Hi,\n\nI would like to meet with you can we arrange a call?"
+                message: "Hi,\n\nI would like to meet with you can we arrange a meeting"
+            },
+            {
+                category: "neutral",
+                who: "Kosay Tabaja",
+                email: "kosay.tabaja@cyninges.com",
+                subject: "Exploring a compliance partnership",
+                actionTaken: "Kash decided not to move forward with this one since they sound more like distributers and will charge a fee",
+                message: "Dear Kash,\n\nI hope you're doing well, and thank you for reaching out.\n\nAt Cyninges, we operate as a Value-Added Distributor (VAD) covering the META region (Middle East, Turkey, and Africa), rather than an MSP.\n\nOur go-to-market model is built on two main sales arms:\n\nDirect Market Engagement:\nWe work closely with end users to develop opportunities, conduct presentations, and run POCs. Once opportunities are matured, they are routed through our channel partners.\nChannel Development & Enablement:\nWe continuously recruit, enable, and support partners across the region to ensure proper coverage and execution.\n\nGiven this structure, we focus heavily on enabling both vendors and partners while maintaining strong engagement with end customers.\n\nAt the moment, I am out of the country due to the current situation and will plan my return once things become calmer. In the meantime, I would be happy to schedule a call to explore potential alignment and understand more about your offering.\n\nLooking forward to connecting.\n\nBest Regards,\n\nKosay Tabaja, Ph.D\nVP Global Alliances & Channels"
             }
         ];
 
